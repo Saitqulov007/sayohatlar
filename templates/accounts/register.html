@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="breadcumb-area bg-img bg-overlay" style="background-image: url({% static 'img/bg-img/hero-1.jpg' %})"></div>
+<section class="dorne-listing-destinations-area section-padding-100-50">
+    <div class="container">
+        <form method='POST'>
+            {% csrf_token %}
+            {% for field in form %}
+            {{ field.label_tag }}{{ field }}<br>
+            {% endfor %}
+            <button type="submit">Ro'xatdan o'tish</button>
+        </form>
+
+        {% if messages %}
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+        {% endif %}
+    </div>
+</section>
+</div>
+{% endblock content %}

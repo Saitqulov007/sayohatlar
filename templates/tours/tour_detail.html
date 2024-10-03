@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="breadcumb-area height-700 bg-img bg-overlay" style="background-image: url({{ tour.image.url }})">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcumb-content">
+                    <div class="map-ratings-review-area d-flex">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><img src="" alt=""></a>
+                        <a href="#">{{ tour.rating }}</a>
+                        <a href="#book">Buyurtma berish</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Breadcumb Area End ***** -->
+
+<!-- ***** Single Listing Area Start ***** -->
+<section class="dorne-single-listing-area section-padding-100">
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Single Listing Content -->
+            <div class="col-12 col-lg-8">
+                <div class="single-listing-content">
+
+                    <div class="listing-title">
+                        <h4>{{ tour.name }}</h4>
+                        <h6><i class="fa-solid fa-eye"></i> {{ tour.hit_count }}</h6>
+                        <h6>{% for country in tour.countries.all %}
+                            {{ country.name }} | 
+                            {% endfor %}</h6>
+                    </div>
+
+                    <div class="single-listing-nav">
+                        <nav>
+                            <ul class="nav nav-pills">
+                                <li class="nav-item"><a class="nav-link active" href="#description" data-toggle="tab">ОПИСАНИЕ</a></li>
+                                <li class="nav-item"><a class="nav-link" href="#images" data-toggle="tab">ФОТО</a>
+                                </li>
+
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="description">
+                                <p>{{ tour.description|safe }}</p>
+                            </div>
+                            <div class="active tab-pane" id="images">
+                                <p>asdadasd</p>
+                            </div>
+                        </div>
+                        <!-- /.tab-content -->
+                    </div>
+                    <div class="overview-content mt-50" id="overview">
+                        
+                            <b>Mavjud mehmonxonalar:</b>
+                            {% for hotel in tour.hotels.all %}
+                                <a href="{% url 'hotel_detail' hotel.id %}"><p>{{ hotel.name }}</p></a>
+                            {% endfor %}
+                        <div class="row mt-5">
+                            <div class="col-6">
+                                <label class="custom-co ntrol custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Accepts Credit Cards</span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <label class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Bike Parking</span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <label class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Wireless Internet</span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <label class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Reservations</span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <label class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Privat Parking</span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <label class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Smoking Area</span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <label class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Wheelchair Accesible</span>
+                                </label>
+                            </div>
+                            <div class="col-6">
+                                <label class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Coupons</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="listing-menu-area mt-100" id="menu">
+                        <h4>Menu</h4>
+                        <!-- Single Listing Menu -->
+                        {% if tour.food.has_breakfast %}
+                        <div class="single-listing-menu d-flex justify-content-between">
+                            <!-- Listing Menu Title -->
+                            <div class="listing-menu-title">
+                                <h6>Nonushta</h6>
+                                <p>{{ tour.food.breakfast }}</p>
+                            </div>
+                            <!-- Listing Menu Price -->
+                            <div class="listing-menu-price">
+                                <h6>$9,90</h6>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- Single Listing Menu -->
+                        {% if tour.food.has_lunch %}
+                        <div class="single-listing-menu d-flex justify-content-between">
+                            <!-- Listing Menu Title -->
+                            <div class="listing-menu-title">
+                                <h6>Tushlik</h6>
+                                <p>{{ tour.food.lunch }}</p>
+                            </div>
+                            <!-- Listing Menu Price -->
+                            <div class="listing-menu-price">
+                                <h6>$9,90</h6>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- Single Listing Menu -->
+                        {% if tour.food.has_dinner %}
+                        <div class="single-listing-menu d-flex justify-content-between">
+                            <!-- Listing Menu Title -->
+                            <div class="listing-menu-title">
+                                <h6>Kechki ovqat</h6>
+                                <p>{{ tour.food.dinner }}</p>
+                            </div>
+                            <!-- Listing Menu Price -->
+                            <div class="listing-menu-price">
+                                <h6>$9,90</h6>
+                            </div>
+                        </div>
+                        {% endif %}
+                        <!-- Single Listing Menu -->
+
+                    </div>
+
+                    <div class="listing-reviews-area mt-100" id="review">
+                        <h4>reviews</h4>
+                        {% for review in tour.reviews.all %}
+                        <div class="single-review-area">
+                            <div class="reviewer-meta d-flex align-items-center">
+                                <img src="{% static 'img/clients-img/client.webp' %}" alt="">
+                                <div class="reviewer-content">
+                                    <div class="review-title-ratings d-flex justify-content-between">
+                                        <div class="ratings">
+                                           <button class="btn btn-{% if review.rating > 7 %}success{% elif review.rating > 5 %}primary{% else %}warning{% endif %}"> {{ review.rating }}/10 </button>
+                                        </div>
+                                    </div>
+                                    <p>{{ review.body }}</p>
+                                </div>
+                            </div>
+                            <div class="reviewer-name">
+                                <h6>{{ review.name }}</h6>
+                                <p>{{ review.created_at }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="location-on-map mt-50" id="lomap">
+                        <h4>Location on map</h4>
+                        <div class="location-map">
+                            <div id="locationMap"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Listing Sidebar -->
+            <div class="col-12 col-md-8 col-lg-4">
+                <div class="listing-sidebar">
+                    <div class="author-widget mt-50 d-flex align-items-center">
+                        <img src="img/clients-img/1.jpg" alt="">
+                        <div class="authors-name">
+                            <a href="#">James Smith</a>
+                            <p>The Author</p>
+                        </div>
+                    </div>
+                    <!-- Author Widget -->
+                    
+
+                    <!-- Contact Form -->
+                    <div id="book" class="contact-form contact-form-widget mt-50">
+                        <h6>Buyurtma berish</h6>
+                        {% if request.user.is_authenticated %}
+                        <form action="{% url 'create_booking' tour.id %}" method='POST'>
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="adult_count">Kattalar</label>
+                                    <input type="number" value="1" name="adult_count" class="form-control" placeholder="Kattalar soni">
+                                </div>
+                                <div class="col-12">
+                                    <label for="kid_count">Bolalar</label>
+                                    <input type="number" value="0" name="kid_count" class="form-control" placeholder="Bolalar soni">
+                                </div>
+                                <div class="col-12">
+                                    <label for="pet_count">Uy hayvonlari</label>
+                                    <input type="number" value="0" name="pet_count" class="form-control" placeholder="Hayvonlar soni">
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn dorne-btn">Yuborish</button>
+                                </div>
+                            </div>
+                        </form>
+                        {% else %}
+                        <h4>Turni bron qilish uchun saytdan <a href="{% url 'login' %}">ro'yxatdan o'tgan</a> bo'lishingiz kerak!</h4>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ***** Single Listing Area End ***** -->
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block tours %}active{% endblock tours %}
+{% block content %}
+<!-- ***** Breadcumb Area Start ***** -->
+    <div class="breadcumb-area bg-img bg-overlay" style="background-image: url(img/bg-img/hero-1.jpg)"></div>
+    <!-- ***** Breadcumb Area End ***** -->
+
+    <!-- ***** Listing Destinations Area Start ***** -->
+    <section class="dorne-listing-destinations-area section-padding-100-50">
+        <div class="container">
+            <form method="get" action="{% url 'tours' %}" class="mb-4">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name">Name</label>
+                        {{ filter.form.name }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="price">Max Price</label>
+                        {{ filter.form.price }}
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="categories">Categories</label>
+                        {{ filter.form.categories }}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="countries">Countries</label>
+                        {{ filter.form.countries }}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="destinations">Destinations</label>
+                        {{ filter.form.destinations }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+            <div class="row">
+                <div class="col-12">
+                    <div class="section-heading dark text-center">
+                        <span></span>
+                        <h4>Featured destinations</h4>
+                        <p>Editor’s pick</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for tour in tours %}
+                <!-- Single Features Area -->
+                 
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <div class="single-features-area mb-50">
+                        <a href="{% url 'tour_detail' tour.id %}" >
+                            <img src="{{ tour.image.url }}" alt="">
+                        </a>
+                        <div class="price-start">
+                            <p>{{ tour.price }}</p>
+                        </div>
+                        <div class="feature-content d-flex align-items-center justify-content-between">
+                            <div class="feature-title">
+                                <h5>{{ tour.name }}</h5>
+                                <p>{{tour.description | safe}}</p>
+                            </div>
+                            <div class="feature-favourite">
+                                <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- ***** Listing Destinations Area End ***** -->
+{% endblock content %}
