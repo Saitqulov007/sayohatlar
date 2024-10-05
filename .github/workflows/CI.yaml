@@ -46,21 +46,28 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-checkout@v4
+        uses: actions/setup-python@v4
         with:
           python-version: '3.11.1'
 
       - name: Install Dependencies
-        run: python -m pip install --updrade pip pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Add SSH key
-        run: mkddir -p ~/.ssh echo "${{secrets.SSH_PRIVATE_KEY}}" > ~/.ssh/id_rsa chmod 600 ~/.ssh/id_rsa
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
         shell: bash
 
       - name: Add server to known hosts
-        run: ssh-keyscan -H 167.71.25.200 >> ~/.ssh/known_hosts
+        run: |
+          ssh-keyscan -H 167.71.25.200 >> ~/.ssh/known_hosts
         shell: bash
 
       - name: Deploy to Server
-        run: ssh root@ 167.71.25.200 "cd ../home/sayohatlar && git pull && ./deploy.sh"
+        run: |
+          ssh root@167.71.25.200 "cd ../home/sayohatlar && git pull && ./deploy.sh"
         shell: bash
