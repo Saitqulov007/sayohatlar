@@ -69,5 +69,5 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          ssh root@167.71.25.200 "cd ../home/sayohatlar && git pull && ./deploy.sh"
+          ssh root@143.198.183.137 "cd ../home/kutubxona_api1 && git pull && chmod +x ./deploy.sh && ./deploy.sh"
         shell: bash
